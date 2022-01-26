@@ -18,7 +18,7 @@ def seedDB():
     cursor.execute(
         "CREATE TABLE show (showid INTEGER PRIMARY KEY, movieid INTEGER, name TEXT, FOREIGN KEY(movieid) REFERENCES movie(movieid))")
     cursor.execute(
-        "CREATE TABLE ticket (ticketid INTEGER PRIMARY KEY, showid INTEGER, username TEXT, FOREIGN KEY(showid) REFERENCES show(showid))")
+        "CREATE TABLE ticket (ticketid INTEGER PRIMARY KEY, showid INTEGER, username TEXT seats INTEGER, FOREIGN KEY(showid) REFERENCES show(showid))")
 
     # Insert movies
     cursor.execute("INSERT INTO movie (name) VALUES ('Spider Man')")
