@@ -18,7 +18,7 @@ def seedDB():
     cursor.execute(
         "CREATE TABLE show (showid INTEGER PRIMARY KEY, movieid INTEGER, name TEXT, FOREIGN KEY(movieid) REFERENCES movie(movieid))")
     cursor.execute(
-        "CREATE TABLE ticket (ticketid INTEGER PRIMARY KEY, showid INTEGER, username TEXT seats INTEGER, FOREIGN KEY(showid) REFERENCES show(showid))")
+        "CREATE TABLE ticket (ticketid INTEGER PRIMARY KEY, showid INTEGER, username TEXT, seats INTEGER, FOREIGN KEY(showid) REFERENCES show(showid))")
 
     # Insert movies
     cursor.execute("INSERT INTO movie (name) VALUES ('Spider Man')")
@@ -37,12 +37,20 @@ def seedDB():
                 "INSERT INTO show (movieid, name) VALUES ('{}', '{}')".format(movie_id, show_name))
 
     # Return the cursor
-    return connection.cursor()
+    connection.commit()
+    return connection
 
 
 def getDB():
     # Check if the database exists
     if os.path.isfile('./bookmovies.db'):
-        return sqlite3.connect("bookmovies.db").cursor()
+        return sqlite3.connect("bookmovies.db")
     # Database does not exist
     return seedDB()
+
+
+print(os.path.isfile('./bookmovies.db'))
+cur = getDB()
+# data = cur.execute('select * from movie').fetchall()
+# data = cur.execute('select * from show where movieid = 1').fetchall()
+# print(data)
