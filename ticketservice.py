@@ -3,24 +3,23 @@ This script defines the ticket service class that does all the required function
 a movie ticket system
 '''
 
-
-from sqlite3.dbapi2 import Error
-
-
 class TicketService:
     def __init__(self, conn):
         self.db = conn.cursor()
         self.conn = conn
         return
 
+
     def get_movie_list(self):
         data = self.db.execute("SELECT * FROM movie").fetchall()
         return data
+
 
     def get_show_list(self, movie_id):
         data = self.db.execute(
             "SELECT * FROM show where movieid = {}".format(movie_id)).fetchall()
         return data
+
 
     def book_ticket(self, show_id, username,  no_of_tickets):
         try:
@@ -31,6 +30,7 @@ class TicketService:
         except:
             return None
 
+
     def get_ticket_by_id(self, ticket_id):
         try:
             data = self.db.execute(
@@ -40,6 +40,7 @@ class TicketService:
             print('No ticket fund with given ID')
             return []
 
+
     def cancel_ticket(self, ticket_id):
         try:
             self.db.execute(
@@ -48,6 +49,7 @@ class TicketService:
 
         except:
             print("No ticket found with the given ID")
+
 
     def cancel_all_tickets(self):
         self.db.execute("DELETE FROM ticket")
