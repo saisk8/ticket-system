@@ -24,7 +24,7 @@ def seedDB():
     cursor.execute("INSERT INTO movie (name) VALUES ('Spider Man')")
     cursor.execute("INSERT INTO movie (name) VALUES ('Superman')")
     cursor.execute("INSERT INTO movie (name) VALUES ('Batman')")
-    cursor.execute("INSERT INTO movie (name) VALUES ('Wonder Women')")
+    cursor.execute("INSERT INTO movie (name) VALUES ('Wonder Woman')")
 
     # Get the total number of movies
     total_movies = cursor.execute(

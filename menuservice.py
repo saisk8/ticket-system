@@ -9,7 +9,6 @@ ts = TicketService(cursor)
 # Create the menus
 main_menu = Menu(header="Booking Kiosk")
 
-
 def book_movie_menu(show_id):
     try:
         seats = int(input('Enter the numer of seats you want to book: '))
@@ -30,17 +29,16 @@ def get_show_timings(movie_id):
     show_menu = Menu(header="Choose a show")
     show_list = ts.get_show_list(movie_id)
     for show in show_list:
-        show_menu.add_option(show[-1], lambda: book_movie_menu(show[0]), False)
+        show_menu.add_option(show[-1], lambda show_id=show[0]: book_movie_menu(show_id), False)
     show_menu.mainloop()
 
 
 def get_movie_list():
     movie_menu = Menu(header="Choose a movie")
     movie_list = ts.get_movie_list()
-    print(movie_list)
     for movie in movie_list:
         movie_menu.add_option(
-            movie[1], lambda: get_show_timings(movie[0]), False)
+            movie[1], lambda movie_id=movie[0]: get_show_timings(movie_id), False)
     movie_menu.mainloop()
 
 
