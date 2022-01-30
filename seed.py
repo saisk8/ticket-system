@@ -47,10 +47,3 @@ def getDB():
         return sqlite3.connect("bookmovies.db")
     # Database does not exist
     return seedDB()
-
-
-# print(os.path.isfile('./bookmovies.db'))
-cur = getDB()
-# data = cur.execute('select * from movie').fetchall()
-# data = cur.execute('select * from show where movieid = 1').fetchall()
-# print(data)
