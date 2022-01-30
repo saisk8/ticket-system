@@ -3,6 +3,7 @@ The fucntion of the script is to create a database and seed it with initial data
 if it does not already exist. In case the database already exists, it will return the
 cursor to the SQLite Database.
 '''
+
 import sqlite3
 import os
 

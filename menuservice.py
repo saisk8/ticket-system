@@ -28,6 +28,7 @@ def book_movie_menu(show_id):
         print("Invalid option")
         book_movie_menu(show_id)
 
+
 def get_show_timings(movie_id):
     show_menu = Menu(header="Choose a show", show_quit_at_toplevel=False)
     show_list = ts.get_show_list(movie_id)
@@ -35,6 +36,7 @@ def get_show_timings(movie_id):
         show_menu.add_option(show[-1], lambda show_id=show[0]: book_movie_menu(show_id), False)
     show_menu.add_option("Go back", lambda: 'break')
     show_menu.mainloop()
+
 
 def get_movie_list():
     movie_menu = Menu(header="Choose a movie", show_quit_at_toplevel=False)
@@ -44,6 +46,7 @@ def get_movie_list():
             movie[1], lambda movie_id=movie[0]: get_show_timings(movie_id), False)
     movie_menu.add_option("Go back", lambda: 'break')
     movie_menu.mainloop()
+
 
 def get_ticket_info():
     try:
@@ -60,6 +63,7 @@ def get_ticket_info():
     # Return to main menu
     return 1
 
+
 def cancel_ticket():
     try:
         ticket_id = int(input('Please enter the ticket id: '))
@@ -69,6 +73,7 @@ def cancel_ticket():
         cancel_ticket()
     # Return to main menu
     return 1
+
 
 def cancel_all_tickets():
     ts.cancel_all_tickets()
