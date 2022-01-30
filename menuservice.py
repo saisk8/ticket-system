@@ -19,26 +19,28 @@ def book_movie_menu(show_id):
             return 0  # Exit progrm due to error
         print('Your ticket with id: {}, has been booked'.format(id))
         # Return to main menu
-        return 1
+        return 0
     except:
         print("Invalid option")
         book_movie_menu(show_id)
 
 
 def get_show_timings(movie_id):
-    show_menu = Menu(header="Choose a show")
+    show_menu = Menu(header="Choose a show", show_quit_at_toplevel=False)
     show_list = ts.get_show_list(movie_id)
     for show in show_list:
         show_menu.add_option(show[-1], lambda show_id=show[0]: book_movie_menu(show_id), False)
+    show_menu.add_option("Go back", lambda: 'break')
     show_menu.mainloop()
 
 
 def get_movie_list():
-    movie_menu = Menu(header="Choose a movie")
+    movie_menu = Menu(header="Choose a movie", show_quit_at_toplevel=False)
     movie_list = ts.get_movie_list()
     for movie in movie_list:
         movie_menu.add_option(
             movie[1], lambda movie_id=movie[0]: get_show_timings(movie_id), False)
+    movie_menu.add_option("Go back", lambda: 'break')
     movie_menu.mainloop()
 
 
@@ -48,14 +50,14 @@ def get_ticket_info():
         data = ts.get_ticket_by_id(ticket_id)
         if len(data) <= 0:
             print('No ticket with ID {} was found'.format(ticket_id))
-            return 1
+            return 0
         for d in data:
             print('Ticket ID: {}\nMovie: {}\nShow: {}\nCustomer: {}\nSeats: {}\n'.format(
                 ticket_id, d[0], d[1], d[2], d[3]))
     except:
         print("Invalid option")
     # Return to main menu
-    return 1
+    return 0
 
 
 def cancel_ticket():
@@ -66,14 +68,14 @@ def cancel_ticket():
         print("Invalid option")
         cancel_ticket()
     # Return to main menu
-    return 1
+    return 0
 
 
 def cancel_all_tickets():
     ts.cancel_all_tickets()
     print("All tickets were canceled.")
     # Return to main menu
-    return 1
+    return 0
 
 
 # Add main menu options

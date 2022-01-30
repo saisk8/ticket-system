@@ -49,7 +49,7 @@ def getDB():
     return seedDB()
 
 
-print(os.path.isfile('./bookmovies.db'))
+# print(os.path.isfile('./bookmovies.db'))
 cur = getDB()
 # data = cur.execute('select * from movie').fetchall()
 # data = cur.execute('select * from show where movieid = 1').fetchall()
